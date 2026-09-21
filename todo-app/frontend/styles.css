@@ -1,0 +1,96 @@
+/* styles.css — оформление учебного приложения */
+
+/* --- Лекция 1: базовые стили страницы --- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+}
+
+.app {
+  max-width: 640px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+}
+
+h1 {
+  margin-top: 0;
+  text-align: center;
+}
+
+/* --- Лекция 2: раскладка формы (Flexbox) --- */
+.add-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.add-form input {
+  flex: 1;                 /* поле растягивается на всё свободное место */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.add-form button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #2d7ff9;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* --- Лекция 2: список задач --- */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.task .title { flex: 1; }
+
+.task.done .title {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.task .del {
+  border: none;
+  background: transparent;
+  color: #e14;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.empty {
+  color: #999;
+  text-align: center;
+  padding: 16px;
+}
+
+/* --- Лекция 2: адаптивность (мобильный экран) --- */
+@media (max-width: 480px) {
+  .app {
+    margin: 0;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+  .add-form {
+    flex-direction: column;
+  }
+}

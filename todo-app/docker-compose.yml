@@ -1,0 +1,30 @@
+# Лекция 4: запуск учебного приложения одной командой.
+#   docker compose up --build   → открыть http://localhost:8000
+#   docker compose down         → остановить (данные БД сохраняются в томе pgdata)
+#   docker compose down -v      → остановить и удалить данные БД
+#
+# Конфигурация берётся из файла .env (скопируйте его из .env.example).
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      # Внутри compose к БД обращаемся по имени сервиса "db", а не localhost.
+      # Это единственное отличие от локального запуска — переопределяем хост.
+      POSTGRES_HOST: db
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    env_file: .env          # POSTGRES_USER / POSTGRES_PASSWORD / POSTGRES_DB
+    ports:
+      - "5432:5432"         # необязательно: доступ к БД с хоста
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
